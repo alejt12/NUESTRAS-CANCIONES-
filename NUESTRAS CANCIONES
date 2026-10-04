@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎶 Nuestras Canciones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <header>
+            <h1>🎶 Nuestras Canciones</h1>
+            <p class="subtitulo">Los momentos que nos unen, en cada nota</p>
+        </header>
+
+        <!-- Reproductor actual -->
+        <section class="reproductor-activo">
+            <img id="portada-actual" src="https://via.placeholder.com/200" alt="Portada" class="portada">
+            <div class="info-cancion">
+                <h2 id="titulo-cancion">Selecciona una canción</h2>
+                <p id="artista-cancion">—</p>
+                <p id="historia-cancion" class="historia">Elige una canción de la lista para ver su historia.</p>
+            </div>
+            <audio id="reproductor" controls>
+                Tu navegador no soporta audio.
+            
+        </section>
+
+        <!-- Lista de canciones -->
+        <section class="lista-canciones">
+            <h3>📋 Mi Playlist</h3>
+            <ul id="playlist">
+                <!-- Se llena con JavaScript -->
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Hecho con 💛 — Para siempre</p>
+    </footer>
+
+    <script>
+        // 🎵 AQUÍ PERSONALIZA TUS CANCIONES
+        const canciones = [
+            {
+                id: 1,
+                titulo: "Canción 1 — Nuestro primer encuentro",
+                artista: "Artista favorito",
+                portada: "https://via.placeholder.com/200/4a90e2/ffffff?text=🎵+1",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                historia: "Esta canción sonaba el día que nos conocimos. Fue el inicio de todo, un momento que jamás olvidaré."
+            },
+            {
+                id: 2,
+                titulo: "Canción 2 — Nuestro viaje",
+                artista: "Otro artista",
+                portada: "https://via.placeholder.com/200/e74c3c/ffffff?text=🎵+2",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                historia: "La pusimos en el camino a ese lugar especial, cantamos juntos y el tiempo se detuvo."
+            },
+            {
+                id: 3,
+                titulo: "Canción 3 — Promesa",
+                artista: "Tu artista preferido",
+                portada: "https://via.placeholder.com/200/2ecc71/ffffff?text=🎵+3",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                historia: "La escuchamos en un momento difícil y nos recordó que juntos todo es más fácil."
+            }
+            // Agrega más canciones copiando el bloque de arriba
+        ];
+
+        // Elementos del DOM
+        const lista = document.getElementById('playlist');
+        const reproductor = document.getElementById('reproductor');
+        const portadaActual = document.getElementById('portada-actual');
+        const tituloActual = document.getElementById('titulo-cancion');
+        const artistaActual = document.getElementById('artista-cancion');
+        const historiaActual = document.getElementById('historia-cancion');
+
+        // Cargar lista
+        function cargarPlaylist() {
+            lista.innerHTML = '';
+            canciones.forEach(cancion => {
+                const elemento = document.createElement('li');
+                elemento.className = 'cancion-item';
+                elemento.innerHTML = `
+                    <img src="${cancion.portada}" alt="${cancion.titulo}" class="miniatura">
+                    <div class="datos">
+                        <strong>${cancion.titulo}</strong>
+                        <span>${cancion.artista}</span>
+                    </div>
+                `;
+                elemento.addEventListener('click', () => reproducir(cancion));
+                lista.appendChild(elemento);
+            });
+        }
+
+        // Reproducir canción seleccionada
+        function reproducir(cancion) {
+            portadaActual.src = cancion.portada;
+            tituloActual.textContent = cancion.titulo;
+            artistaActual.textContent = cancion.artista;
+            historiaActual.textContent = cancion.historia;
+            reproductor.src = cancion.audio;
+            reproductor.play();
+        }
+
+        // Iniciar
+        cargarPlaylist();
+    </script>
+</body>
+</html>
